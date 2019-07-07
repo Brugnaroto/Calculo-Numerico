@@ -99,6 +99,42 @@ while True:
             print("W: %.0f"%W)
             print("X: %.0f"%X)
             print("Z: %.0f"%Z)
+        
+            A = [[1, -1, 0, 0, R-S],
+            [0, 1, -1, 0,X-V ],
+            [0, 0, 1, -1, Z-W],
+            [-1, 0, 0, 1,T-U]]
+    
+            n = len(A)
+            t = len(A[0])
+            for i in range(n):
+                pivot = A[i][i]
+                for j in range(i+1, n):
+                    m = -A[j][i]/pivot
+                    for k in range(i, n+1): 
+                        A[j][k] += m*A[i][k]
+            print("\n")
+            
+            d=0
+            c = (A[2][4] - A[2][3]*d)/A[2][2]
+            b = (A[1][4] - A[1][3]*d - A[1][2]*c)/A[1][1]
+            a = (A[0][4] - A[0][3]*d - A[0][2]*c - A[0][1]*b)/A[0][0]
+            d = (a + b + c)/3
+            a = a + d
+            b = b + d
+            c = c + d
+            if a < 0:
+                a = a*-1
+            if b < 0:
+                b = b*-1
+            if c < 0:
+                c = c*-1
+            if d < 0:
+                d = d*-1
+            print("Entre cruzamentos A e B: %.0f"%(a))
+            print("Entre cruzamentos A e C: %.0f"%(b))
+            print("Entre cruzamentos C e D: %.0f"%(c))
+            print("Entre cruzamentos D e B: %.0f"%(d))
             pygame.quit()
     
     car_position(x,y, asfalto)
@@ -295,7 +331,7 @@ while True:
     car_position(x6, y6, car6)
     car_position(x7, y7, car7)
     car_position(x8, y8, car8)
-    
+
     pygame.display.flip()       
     pygame.display.update()
-    
+
